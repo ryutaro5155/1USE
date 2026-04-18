@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campus Cosme Research</title>
+    <link rel="preconnect" href="https://images.unsplash.com" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="メニュー">
+        <div class="brand">
+          <span class="brand-mark">C</span>
+          <div>
+            <strong>Campus Cosme Research</strong>
+            <small>大学生購買インサイト</small>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="主要画面">
+          <button class="nav-item active" data-view="dashboard">ダッシュボード</button>
+          <button class="nav-item" data-view="reasons">未購入理由</button>
+          <button class="nav-item" data-view="competitors">競合比較</button>
+          <button class="nav-item" data-view="reviews">学生レビュー</button>
+          <button class="nav-item" data-view="research">調査設計</button>
+        </nav>
+
+        <div class="research-card">
+          <p class="eyebrow">今月の回収</p>
+          <strong>1,284件</strong>
+          <span>回答単価 82円</span>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">メーカー向け分析SaaS</p>
+            <h1>買われなかった理由を、次の施策に変える。</h1>
+          </div>
+          <div class="top-actions">
+            <label>
+              対象カテゴリ
+              <select id="categoryFilter">
+                <option value="lip">リップ</option>
+                <option value="base">ベースメイク</option>
+                <option value="skin">スキンケア</option>
+              </select>
+            </label>
+            <button class="primary-action" id="exportButton">レポート出力</button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard">
+          <div class="metric-grid" aria-label="主要指標">
+            <article class="metric">
+              <span>購入検討者</span>
+              <strong id="metricConsidered">4,860</strong>
+              <small>前月比 +18%</small>
+            </article>
+            <article class="metric">
+              <span>未購入回答</span>
+              <strong id="metricLost">1,642</strong>
+              <small>理由つき回答 92%</small>
+            </article>
+            <article class="metric">
+              <span>競合流出率</span>
+              <strong id="metricSwitch">34%</strong>
+              <small>価格比較による流出が最多</small>
+            </article>
+            <article class="metric">
+              <span>改善余地スコア</span>
+              <strong id="metricScore">78</strong>
+              <small>訴求変更で改善見込み</small>
+            </article>
+          </div>
+
+          <div class="split-layout">
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">未購入理由</p>
+                  <h2>購入を止めた要因</h2>
+                </div>
+                <span class="tag">大学1-4年</span>
+              </div>
+              <div class="bar-list" id="reasonBars"></div>
+            </section>
+
+            <section class="panel image-panel">
+              <img
+                src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=900&q=80"
+                alt="化粧品が並ぶテーブル"
+              />
+              <div class="image-copy">
+                <p class="eyebrow">示唆</p>
+                <h2 id="mainInsight">価格納得感と色味の想像しづらさが離脱を生んでいます。</h2>
+                <p id="mainInsightBody">
+                  店頭テスターに触れる前の比較段階で、SNSの発色画像と口コミの具体性が購入判断に強く影響しています。
+                </p>
+              </div>
+            </section>
+          </div>
+
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">施策候補</p>
+                <h2>メーカーに返せるリサーチ提案</h2>
+              </div>
+              <span class="tag">優先度順</span>
+            </div>
+            <div class="action-grid" id="actionGrid"></div>
+          </section>
+        </section>
+
+        <section class="view" id="reasons">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">深掘り</p>
+                <h2>「買わなかった」回答の分解</h2>
+              </div>
+              <button class="ghost-action" id="toggleSegment">理系学生に切替</button>
+            </div>
+            <div class="reason-table" id="reasonTable"></div>
+          </section>
+        </section>
+
+        <section class="view" id="competitors">
+          <div class="competitor-layout">
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">競合流出</p>
+                  <h2>購入された他社商品</h2>
+                </div>
+                <span class="tag">N=547</span>
+              </div>
+              <div class="competitor-list" id="competitorList"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">選ばれた理由</p>
+                  <h2>競合に勝った訴求</h2>
+                </div>
+              </div>
+              <div class="quote-stack" id="quoteStack"></div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view" id="reviews">
+          <section class="panel">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">レビュー収集</p>
+                <h2>大学生の生声</h2>
+              </div>
+              <span class="tag">購入者・未購入者</span>
+            </div>
+            <div class="review-grid" id="reviewGrid"></div>
+          </section>
+        </section>
+
+        <section class="view" id="research">
+          <div class="research-layout">
+            <section class="panel">
+              <div class="panel-header">
+                <div>
+                  <p class="eyebrow">調査テンプレート</p>
+                  <h2>メーカー別に即日配信</h2>
+                </div>
+              </div>
+              <form class="survey-form">
+                <label>
+                  調査テーマ
+                  <input type="text" value="新作リップの未購入理由調査" />
+                </label>
+                <label>
+                  回答対象
+                  <select>
+                    <option>首都圏の女子大学生</option>
+                    <option>美容関心が高い大学1-2年</option>
+                    <option>ドラッグストア購入経験者</option>
+                  </select>
+                </label>
+                <label>
+                  追加質問
+                  <textarea rows="5">最後に比較した商品名と、最終的に買わなかった理由を教えてください。</textarea>
+                </label>
+                <button class="primary-action" type="button">配信プレビュー</button>
+              </form>
+            </section>
+            <section class="panel checklist-panel">
+              <p class="eyebrow">納品物</p>
+              <h2>プレゼンで伝える価値</h2>
+              <ul class="check-list">
+                <li>未購入理由をカテゴリ別・大学属性別に可視化</li>
+                <li>競合に流れた商品名と決め手を回収</li>
+                <li>メーカーの次回施策に使える改善仮説を自動生成</li>
+                <li>レビュー収集をリサーチ代行として月額化</li>
+              </ul>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">レポートを作成しました</div>
+    <script src="script.js"></script>
+  </body>
+</html>
